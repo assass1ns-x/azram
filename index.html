@@ -1,1 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>💖</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: black;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+}
+
+#login {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  z-index: 10;
+}
+
+#login input {
+  padding: 15px;
+  font-size: 20px;
+  background: black;
+  border: 2px solid white;
+  color: white;
+  text-align: center;
+}
+
+#content {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #111 0%, black 60%);
+}
+
+#message {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-size: 40px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+#click {
+  margin-top: 15px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.heart {
+  position: absolute;
+  color: red;
+  font-size: 24px;
+  animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-150px);
+    opacity: 0;
+  }
+}
+
+.fall {
+  animation: fallDown 1.5s ease-out forwards;
+}
+
+@keyframes fallDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(300px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="login">
+  <input type="password" id="pass" placeholder="Password">
+</div>
+
+<div id="content">
+  <div id="message">
+    Seni çok seviyorum ❤️
+    <div id="click">herhangi bir yere tıkla</div>
+  </div>
+</div>
+
+<script>
+const correct = "22.02.2022";
+const pass = document.getElementById("pass");
+const login = document.getElementById("login");
+const content = document.getElementById("content");
+
+pass.addEventListener("keydown", e => {
+  if (e.key === "Enter" && pass.value === correct) {
+    login.style.display = "none";
+    content.style.display = "block";
+    lightEffect();
+    heartRain();
+  }
+});
+
+function lightEffect() {
+  content.style.background =
+    "radial-gradient(circle at center, #222 0%, black 70%)";
+}
+
+function heartRain() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+  }, 300);
+}
+
+document.addEventListener("click", e => {
+  if (content.style.display === "block") {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.className = "heart fall";
+    heart.style.left = e.clientX + "px";
+    heart.style.top = e.clientY + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1500);
+  }
+});
+</script>
+
+</body>
+</html>
+
 
