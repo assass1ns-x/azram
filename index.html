@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>💖</title>
+
 <style>
 * {
   margin: 0;
@@ -66,9 +67,22 @@ body {
 
 .heart {
   position: absolute;
+  font-size: 48px;
   color: red;
-  font-size: 24px;
   animation: floatUp 3s linear forwards;
+  text-align: center;
+  user-select: none;
+}
+
+.heart span {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+  pointer-events: none;
 }
 
 @keyframes floatUp {
@@ -141,10 +155,15 @@ function heartRain() {
 document.addEventListener("click", e => {
   if (content.style.display === "block") {
     const heart = document.createElement("div");
-    heart.innerHTML = "❤️";
     heart.className = "heart fall";
     heart.style.left = e.clientX + "px";
     heart.style.top = e.clientY + "px";
+
+    heart.innerHTML = `
+      ❤️
+      <span>azram</span>
+    `;
+
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 1500);
   }
@@ -153,5 +172,3 @@ document.addEventListener("click", e => {
 
 </body>
 </html>
-
-
